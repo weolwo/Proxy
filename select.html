@@ -1,0 +1,57 @@
+ <!DOCTYPE html>
+<html>
+ 
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+	</head>
+ 
+	<body>
+ 
+		<input readonly="readonly" style="width: 99%;background:none;outline:none;border: #ccc solid 1px;
+border:0px;" value="请选择姓名" />
+		
+		<!--overflow-y:为div层（模拟选项窗）设置垂直滚动-->
+		<div style="height:100px;overflow-y:auto;border-style:groove;display: none;border-radius: 5px">
+			<ul style="list-style: none;margin: 0;padding: 0;text-align: left;color: red;border-radius: 5px;width: 98%">
+				<li>孙逸</li>
+				<li>张三</li>
+				<li>李四</li>
+				<li>王五</li>
+			</ul>
+		</div>
+		<script type="text/javascript">
+			//让选项窗与输入窗等宽
+			$(function() {
+				$("div").css({
+					'width': $("input").css('width')
+				})
+			})
+			
+			$("input").click(function() {
+			//点击输入框打开选项窗，若已打开则关闭
+				if($("div").css('display') == 'none') {
+					$("div").show();
+					$('li:contains(' + $(this).val() + ')').css('background-color', 'orange')
+				} else {
+					$("div").hide();
+				}
+			})
+			$("li").click(function() {
+				//点击选择时为输入框赋值。并关闭选项窗
+				$("input").val($(this).text())
+				$("div").hide();
+			})
+			//为选项设置颜色
+			$("li").mouseover(function() {
+				$('li').css('background-color', 'white')
+				$(this).css({
+					'cursor': 'pointer',
+					'background-color': 'orange'
+				});
+			})
+		</script>
+	</body>
+ 
+</html>
